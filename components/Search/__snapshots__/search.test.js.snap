@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`search component should pass a changed value to the onChange handler 1`] = `"<Input action={{...}} fluid={true} iconPosition=\\"left\\" placeholder=\\"Пошук...\\" loading={false} value=\\"\\" onChange={[Function (anonymous)]} type=\\"text\\" />"`;
