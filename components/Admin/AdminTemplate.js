@@ -29,6 +29,9 @@ const AdminTemplate = ({ children }) => {
             <Grid.Column tablet={5} computer={4}>
               <Sticky context={menuElem} offset={10} scrollContext={width >= 768 ? globalThis: null}>
                 <Menu vertical icon fluid color='red' stackable className='' pointing>
+                  <Link href='/admin'>
+                    <Menu.Item as='a' href='/admin' name='Admin' active={path === '/admin'} />
+                  </Link>
                   <Link href='/admin/orders'>
                     <Menu.Item as='a' href='/admin/orders' name='Замовлення' active={path === '/admin/orders'} />
                   </Link>

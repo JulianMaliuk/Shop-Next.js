@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prod": "npx next start -p 9045"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
@@ -17,7 +18,7 @@
     "react-dom": "17.0.1",
     "react-ga": "^3.3.0",
     "react-image-gallery": "^1.0.9",
-    "react-lazy-images": "^1.1.0",
+    "react-lazy-load-image-component": "^1.5.1",
     "react-redux": "^7.2.2",
     "redux-logger": "^3.0.6",
     "semantic-ui-css": "^2.4.1",

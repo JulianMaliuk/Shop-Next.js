@@ -6,7 +6,7 @@ import {
   Button,
   Label,
 } from 'semantic-ui-react';
-import { LazyImage } from "react-lazy-images";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Link from 'next/link'
 import getLabel from '../../helpers/getLabel'
 
@@ -19,14 +19,10 @@ export default function ProductCard(props) {
 
   return (
     <Card>
-      <LazyImage
+      <LazyLoadImage
           src={img}
           alt={title}
           label={_label ? { as: 'a', ribbon: 'right', ..._label } : null}
-          placeholder={({ imageProps, ref }) => (
-              <img ref={ref} src={`/images/product-placeholder.jpg`} alt={imageProps.alt} />
-          )}
-          actual={({ imageProps }) => <Image {...imageProps} />}
       />
       <Card.Content>
         <Card.Header content={title} />

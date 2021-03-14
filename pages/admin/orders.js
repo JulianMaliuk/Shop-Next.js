@@ -92,7 +92,7 @@ class OrderList extends Component {
                     <Icon name='print' onClick={()=> OrderPrint(order, window)} style={{cursor: 'pointer', marginLeft: '8px'}} />
                     <OrderEditor trigger={<Icon name='edit' style={{cursor: 'pointer', marginLeft: '8px'}} />} order={order} onChangeProperty={this.handleChangeProperty.bind(this)} />
                     &nbsp;&nbsp;{moment(order.createdAt).format('DD.MM.YYYY HH:mm:ss')}
-                    {!liqPay && <a href={`/checkout/${order._id}`} style={{marginLeft: '8px'}} target='_blank'><Icon name='money bill alternate outline' /></a>}
+                    {!liqPay && <a href={`/order-created/${order._id}`} style={{marginLeft: '8px'}} target='_blank'><Icon name='money bill alternate outline' /></a>}
                   </List.Header>
                   <List.Description>
                       <Grid columns={2} stackable>
