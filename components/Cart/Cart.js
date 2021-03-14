@@ -2,7 +2,6 @@ import React from 'react'
 import { Icon, Item, Modal, Label, Button, Header, Menu } from 'semantic-ui-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import {SITE_URL} from "../../constants";
 
 import { useDispatch } from 'react-redux';
 import { setIsOpenCart } from '../../redux/reducers/cart'
@@ -18,7 +17,7 @@ export default function Cart({cart, total, removeFromCart, setCount, isOpenCart}
           ? (cart.map(item => {
             const discount = (item.discount && item.discount > 0) ? (1-item.discount) : 1
             return <Item key={item.id}>
-              <Item.Image size='small' src={SITE_URL + item.img} />
+              <Item.Image size='small' src={item.img} />
               <Item.Content verticalAlign='middle'>
                 <h3>{item.title}</h3>
                 <Label color='orange' tag>{Math.round(item.priceUAH * discount)} грн</Label>

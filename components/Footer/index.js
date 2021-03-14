@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid, Header, Icon, List } from 'semantic-ui-react';
-import { SITE_URL } from '../../constants'
 
 const Footer = () => {
   return (
@@ -36,7 +35,7 @@ const Footer = () => {
                   <em>Продаж здійснюється офіційним представником виробника ФОП Іванченко А.Г.</em><br />
                   <a href='https://magnum.com.ua/contract-offer-magnum.com.ua.pdf' target='_blank'>Публічний договір - оферта</a>
                 </List.Item>
-                <img src={`${SITE_URL}/images/visa-mastercard.png`} style={{maxHeight: '35px', marginTop: '10px'}} />
+                <img src={`/images/visa-mastercard.png`} style={{maxHeight: '35px', marginTop: '10px'}} />
               </List>
             </div>
           </Grid.Column>
@@ -61,7 +60,7 @@ const Footer = () => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <style jsx>{`
+      <style jsx global>{`
         .ui.divided.three.column.grid.footer {
           border-top-left-radius: 6px;
           border-top-right-radius: 6px;

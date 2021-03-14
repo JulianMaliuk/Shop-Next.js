@@ -1,9 +1,13 @@
 
 import { useEffect } from 'react'
-import { Provider, useDispatch } from 'react-redux'
+import { Provider } from 'react-redux'
+import ReactGA from 'react-ga';
+import Router from 'next/router'
 import { useStore } from '../redux/store'
 import { REHYDRATE } from '../redux/reducers/cart'
 import '../styles/globals.css'
+
+ReactGA.initialize('UA-129407988-1', {debug: false, testMode: process.env.NODE_ENV === 'test'});
 
 function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState)
@@ -15,6 +19,10 @@ function MyApp({ Component, pageProps }) {
       const { cart } = store.getState()
       localStorage.setItem('storeShop', JSON.stringify({ cart }))
     })
+
+    Router.events.on('routeChangeComplete', (url) => {
+      ReactGA.pageview(url)
+    });
   }, []);
 
   return (

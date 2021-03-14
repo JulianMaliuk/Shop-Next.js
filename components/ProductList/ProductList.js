@@ -1,20 +1,11 @@
 import React, {Component} from 'react'
 import { Grid, Card, Loader } from 'semantic-ui-react'
 import CardContainer from '../Card'
-import Router from 'next/router'
 
 class ProductList extends Component {
   componentDidMount() {
     const { fetchProducts } = this.props;
     fetchProducts();
-
-    Router.events.on('routeChangeComplete', (url) => {
-      if (window.gtag) {
-        window.gtag('config', 'UA-129407988-1', {
-          'page_path': location.pathname
-        });
-      }
-    });
   }
 
   render() {

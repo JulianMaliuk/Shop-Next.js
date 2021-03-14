@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Divider, Grid, Item, Message, Loader, Select } from 'semantic-ui-react'
-import {API_URL, SITE_URL} from '../../constants'
+import {API_URL} from '../../constants'
 import axios from 'axios'
 import { withRouter } from 'next/router'
 
@@ -186,7 +186,7 @@ class Checkout extends Component {
         <Item.Group divided>
           {cart && cart.map(product => (
             <Item key={product.id}>
-              <Item.Image size='tiny' src={SITE_URL + product.img} />
+              <Item.Image size='tiny' src={product.img} />
               <Item.Content verticalAlign='middle'>{product.title} ({product.count})</Item.Content>
             </Item>
           ))}

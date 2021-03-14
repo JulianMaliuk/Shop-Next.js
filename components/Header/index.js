@@ -33,7 +33,7 @@ const Header = () => {
         <Cart />
       </Menu.Menu>
     </Menu>
-    <style jsx>{`
+    <style jsx global>{`
       .ui.small.stackable.main.menu {
         margin-top: 10px;
       }

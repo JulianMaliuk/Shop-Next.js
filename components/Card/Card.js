@@ -9,7 +9,6 @@ import {
 import { LazyImage } from "react-lazy-images";
 import Link from 'next/link'
 import getLabel from '../../helpers/getLabel'
-import { SITE_URL } from '../../constants'
 
 export default function ProductCard(props) {
   const { id, img, title, priceUAH, available, preOrder, discount, label, url, category, key_features = [] } = props.item
@@ -21,11 +20,11 @@ export default function ProductCard(props) {
   return (
     <Card>
       <LazyImage
-          src={SITE_URL + img}
+          src={img}
           alt={title}
           label={_label ? { as: 'a', ribbon: 'right', ..._label } : null}
           placeholder={({ imageProps, ref }) => (
-              <img ref={ref} src={`${SITE_URL}/images/product-placeholder.jpg`} alt={imageProps.alt} />
+              <img ref={ref} src={`/images/product-placeholder.jpg`} alt={imageProps.alt} />
           )}
           actual={({ imageProps }) => <Image {...imageProps} />}
       />
