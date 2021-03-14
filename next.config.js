@@ -1,4 +1,4 @@
-const BASE_URL = 'http://shop.magnum.com.ua'
+const BASE_URL = 'https://shop.magnum.com.ua'
 // const BASE_URL = 'http://localhost:9044'
 
 module.exports = {

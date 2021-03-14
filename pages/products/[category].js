@@ -7,9 +7,9 @@ import Link from 'next/link'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-const Products = () => {
+const Products = ({ host, category }) => {
   const router = useRouter()
-  const {category} = router.query
+  const currentURL = host + router.asPath
   const og = {};
   switch(category) {
     case 'car-alarm':
@@ -30,9 +30,7 @@ const Products = () => {
     <PageTemplate>
       <Head>
         <title>{og.title}</title>
-
-        {/* TODO FIX  */}
-        {/* <meta property="og:url"                    content={window.location.href} /> */}
+        <meta property="og:url"                    content={currentURL} />
         <meta property="og:description"            content={og.title} />
         <meta property="og:image"                  content={og.img} />
         <meta property="og:site_name"              content="Shop Magnum" />
@@ -67,3 +65,15 @@ const Products = () => {
 }
 
 export default Products
+
+export async function getServerSideProps({ req, query }) {
+  const { category } = query;
+  const host = req ? req.headers.host : location.hostname;
+
+  return {
+    props: {
+      host,
+      category
+    },
+  }
+}

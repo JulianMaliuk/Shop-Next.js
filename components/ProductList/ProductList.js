@@ -24,30 +24,32 @@ class ProductList extends Component {
                   key={productProps.id}
                 />
               ))}
-              {products && <script type="application/ld+json">
-                  {JSON.stringify({
-                    "@context": "http://schema.org",
-                    "@graph": products.map((product) => (
-                      {
-                        "@context": "http://schema.org/",
-                        "@type": "Product",
-                        "brand": {
-                          "@type": "Brand",
-                          "name": "MagnuM"
-                        },
-                        "image": `${window.location.origin}${product.img}`,  
-                        "name": `${product.title}`,
-                        "description": product.title + ' | ' + product.category.title,
-                        "offers": {
-                          "@type": "Offer",
-                          "url": product.url ? `${window.location.href}/${product.category.key}/${product.url}` : `${window.location.href}`,
-                          "availability": `http://schema.org/${ (product.available || product.preOrder) ? 'InStock' : 'OutOfStock'}`,
-                          "priceCurrency": "UAH",
-                          "price": Math.round(product.priceUAH * (1-product.discount))
-                        }
+              {products 
+                && <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify({
+                  "@context": "http://schema.org",
+                  "@graph": products.map((product) => (
+                    {
+                      "@context": "http://schema.org/",
+                      "@type": "Product",
+                      "brand": {
+                        "@type": "Brand",
+                        "name": "MagnuM"
+                      },
+                      "image": `${window.location.origin}${product.img}`,  
+                      "name": `${product.title}`,
+                      "description": product.title + ' | ' + product.category.title,
+                      "offers": {
+                        "@type": "Offer",
+                        "url": product.url ? `${window.location.href}/${product.category.key}/${product.url}` : `${window.location.href}`,
+                        "availability": `http://schema.org/${ (product.available || product.preOrder) ? 'InStock' : 'OutOfStock'}`,
+                        "priceCurrency": "UAH",
+                        "price": Math.round(product.priceUAH * (1-product.discount))
                       }
-                  ))})}
-                </script>
+                    }
+                ))})}}
+              />
               }
             </Card.Group>
           )}
