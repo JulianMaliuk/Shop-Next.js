@@ -1,13 +1,16 @@
 import React from 'react';
 import { Grid, Menu } from 'semantic-ui-react'
+import Link from 'next/link'
+import Head from 'next/head'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+
 import { Sidebar, PageTemplate } from '../../components'
 import ProductList from '../../components/ProductList'
 import Filter from '../../components/Filter'
-import Link from 'next/link'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { API_HOST, API_URL } from '../../constants';
 
-const Products = ({ host, category }) => {
+const Products = ({ host, category, fromServer }) => {
   const router = useRouter()
   const currentURL = host + router.asPath
   const og = {};
@@ -29,11 +32,12 @@ const Products = ({ host, category }) => {
   return (
     <PageTemplate>
       <Head>
-        <title>{og.title}</title>
-        <meta property="og:url"                    content={currentURL} />
-        <meta property="og:description"            content={og.title} />
-        <meta property="og:image"                  content={og.img} />
-        <meta property="og:site_name"              content="Shop Magnum" />
+        <title key="title">{og.title}</title>
+        <meta key="description" name="description"              content={og.title} />
+        <meta key="og:url" property="og:url"                    content={currentURL} />
+        <meta key="og:description" property="og:description"    content={og.title} />
+        <meta key="og:image" property="og:image"                content={og.img} />
+        <meta key="og:site_name" property="og:site_name"        content="Shop Magnum" />
       </Head>
       <Menu pointing secondary fluid widths={5} color='red' stackable className='product-category-menu'>
         <Link href='/products/all'>
@@ -52,7 +56,7 @@ const Products = ({ host, category }) => {
       <Grid columns='equal'>
         <Grid.Row>
           <Grid.Column floated='right' mobile={16} tablet={10} computer={12}>
-            <ProductList />
+            <ProductList fromServer={fromServer} currentURL={currentURL} host={host} />
           </Grid.Column>
           <Grid.Column floated='left'>
             <Sidebar />
@@ -70,10 +74,15 @@ export async function getServerSideProps({ req, query }) {
   const { category } = query;
   const host = req ? req.headers.host : location.hostname;
 
+  const { data: { currency, data, categories } } = await axios.get(`${API_HOST}${API_URL}/products`)
+  if(!data) return []
+  const products = data.map(o => ({ ...o, id: o._id }))
+
   return {
     props: {
       host,
-      category
+      category,
+      fromServer: {products, categories, currency}
     },
   }
 }

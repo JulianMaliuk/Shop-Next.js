@@ -3,7 +3,7 @@ import { createSelector } from '@reduxjs/toolkit'
 import { withRouter } from 'next/router'
 
 import ProductList from './ProductList';
-import {fetchProducts} from "../../redux/reducers/products";
+import {fetchProducts, setProducts} from "../../redux/reducers/products";
 
 const selectProducts = state => state.products.items;
 const selectQuery = state => state.products.searchQuery;
@@ -37,7 +37,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
   
-const mapDispatchToProps = { fetchProducts }
+const mapDispatchToProps = { fetchProducts, setProducts }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProductList));
 

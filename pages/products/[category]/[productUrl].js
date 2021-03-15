@@ -35,17 +35,17 @@ const ProductPage = (props) => {
       ? <PageTemplate>
           <Segment> 
             <Head>
-                <title>{product.title}</title>
-                <meta name="description" content={`${product.description}. ${product.page.descr}`} />
-                <meta property="og:type" content="product.item" />
-                <meta property="og:title" content={product.title} />
-                <meta property="og:description" content={`${product.description}. ${product.page.descr}`} />
-                <meta property="og:site_name" content="Shop Magnum" />
-                <meta property="og:image:type" content="image/jpeg" />
-                <meta property="og:image" content={`${host}${product.img}`} />
-                <meta property="og:image:secure_url" content={`${host}${product.img}`} />
-                <meta property="og:url" content={currentURL} />
-                <meta property="og:locale" content="uk_UA" />
+                <title key="title">{product.title}</title>
+                <meta key="description" name="description" content={`${product.description}. ${product.page.descr}`} />
+                <meta key="og:type" property="og:type" content="product.item" />
+                <meta key="og:title" property="og:title" content={product.title} />
+                <meta key="og:description" property="og:description" content={`${product.description}. ${product.page.descr}`} />
+                <meta key="og:site_name" property="og:site_name" content="Shop Magnum" />
+                <meta key="og:image:type" property="og:image:type" content="image/jpeg" />
+                <meta key="og:image" property="og:image" content={`${host}${product.img}`} />
+                <meta key="og:image:secure_url" property="og:image:secure_url" content={`${host}${product.img}`} />
+                <meta key="og:url" property="og:url" content={currentURL} />
+                <meta key="og:locale" property="og:locale" content="uk_UA" />
             </Head>
             {/* <Icon size='large' name='arrow left' link style={{marginRight: '12px', color: '#045490'}} onClick={this.props.history.goBack} /> */}
             <Breadcrumb>

@@ -1,15 +1,23 @@
+import { withRouter } from 'next/router';
 import React, {Component} from 'react'
 import { Grid, Card, Loader } from 'semantic-ui-react'
 import CardContainer from '../Card'
 
 class ProductList extends Component {
+  state = {
+    products: []
+  }
   componentDidMount() {
-    const { fetchProducts } = this.props;
-    fetchProducts();
+    const { setProducts, fromServer } = this.props;
+    if(fromServer) {
+      this.setState({ products: fromServer.products })
+      setProducts(fromServer)
+    }
   }
 
   render() {
-    const { products, isLoading } = this.props
+    const { isLoading, products: localProducts, fromServer, currentURL, host } = this.props
+    const products = localProducts.length ? localProducts : fromServer.products
 
     return (
       <Grid className="wrapper-product">
@@ -37,12 +45,12 @@ class ProductList extends Component {
                         "@type": "Brand",
                         "name": "MagnuM"
                       },
-                      "image": `${window.location.origin}${product.img}`,  
+                      "image": `${host}${product.img}`,  
                       "name": `${product.title}`,
                       "description": product.title + ' | ' + product.category.title,
                       "offers": {
                         "@type": "Offer",
-                        "url": product.url ? `${window.location.href}/${product.category.key}/${product.url}` : `${window.location.href}`,
+                        "url": product.url ? `${currentURL}/${product.category.key}/${product.url}` : `${currentURL}`,
                         "availability": `http://schema.org/${ (product.available || product.preOrder) ? 'InStock' : 'OutOfStock'}`,
                         "priceCurrency": "UAH",
                         "price": Math.round(product.priceUAH * (1-product.discount))
@@ -59,4 +67,4 @@ class ProductList extends Component {
   }
 }
 
-export default ProductList
+export default withRouter(ProductList)

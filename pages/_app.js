@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { Provider } from 'react-redux'
 import ReactGA from 'react-ga';
 import Router from 'next/router'
+import NextNprogress from 'nextjs-progressbar';
 import { useStore } from '../redux/store'
 import { REHYDRATE } from '../redux/reducers/cart'
 import '../styles/globals.css'
@@ -27,6 +28,15 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
+      <NextNprogress
+        color="red"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height="3"
+        options={{
+          showSpinner: false
+        }}
+      />
       <Component {...pageProps} />
     </Provider>
   )
