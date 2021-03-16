@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from "axios";
+import {HYDRATE} from 'next-redux-wrapper';
 import { API_URL } from '../../constants'
 
 const initialState = {
@@ -39,6 +40,11 @@ const deliverySlice = createSlice({
     setOffice(state, action) {
       state.office = action.payload
     },
+    extraReducers: {
+      [HYDRATE]: (state, action) => {
+        return {...state, ...action.payload.delivery}
+      }
+    }
   },
 })
 

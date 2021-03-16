@@ -4,20 +4,9 @@ import { Grid, Card, Loader } from 'semantic-ui-react'
 import CardContainer from '../Card'
 
 class ProductList extends Component {
-  state = {
-    products: []
-  }
-  componentDidMount() {
-    const { setProducts, fromServer } = this.props;
-    if(fromServer) {
-      this.setState({ products: fromServer.products })
-      setProducts(fromServer)
-    }
-  }
 
   render() {
-    const { isLoading, products: localProducts, fromServer, currentURL, host } = this.props
-    const products = localProducts.length ? localProducts : fromServer.products
+    const { isLoading, products, currentURL, host } = this.props
 
     return (
       <Grid className="wrapper-product">

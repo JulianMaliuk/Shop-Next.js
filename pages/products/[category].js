@@ -9,8 +9,10 @@ import { Sidebar, PageTemplate } from '../../components'
 import ProductList from '../../components/ProductList'
 import Filter from '../../components/Filter'
 import { API_HOST, API_URL } from '../../constants';
+import {wrapper} from '../../redux/store';
+import { fetchProducts } from '../../redux/reducers/products'
 
-const Products = ({ host, category, fromServer }) => {
+const Products = ({ host, category }) => {
   const router = useRouter()
   const currentURL = host + router.asPath
   const og = {};
@@ -56,7 +58,7 @@ const Products = ({ host, category, fromServer }) => {
       <Grid columns='equal'>
         <Grid.Row>
           <Grid.Column floated='right' mobile={16} tablet={10} computer={12}>
-            <ProductList fromServer={fromServer} currentURL={currentURL} host={host} />
+            <ProductList currentURL={currentURL} host={host} />
           </Grid.Column>
           <Grid.Column floated='left'>
             <Sidebar />
@@ -70,19 +72,16 @@ const Products = ({ host, category, fromServer }) => {
 
 export default Products
 
-export async function getServerSideProps({ req, query }) {
+export const getServerSideProps = wrapper.getServerSideProps(async ({ req, query, store }) => {
   const { category } = query;
   const host = req ? req.headers.host : location.hostname;
 
-  const { data: { currency, data, categories } } = await axios.get(`${API_HOST}${API_URL}/products`)
-  if(!data) return []
-  const products = data.map(o => ({ ...o, id: o._id }))
+  await store.dispatch(fetchProducts());
 
   return {
     props: {
       host,
       category,
-      fromServer: {products, categories, currency}
     },
   }
-}
+})

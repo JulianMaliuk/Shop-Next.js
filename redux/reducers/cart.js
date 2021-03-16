@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {HYDRATE} from 'next-redux-wrapper';
 
 export const initialState = {
   items: [],
@@ -33,6 +34,11 @@ const cartSlice = createSlice({
     setIsOpenCart(state, action) {
       state.isOpenCart = action.payload
     },
+    extraReducers: {
+      [HYDRATE]: (state, action) => {
+        return {...state, ...action.payload.cart}
+      }
+    }
   },
 })
 
